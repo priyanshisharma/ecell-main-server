@@ -16,7 +16,7 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       - name: migrate and test
-        run: bash -c "python manage.py makemigrations && python manage.py migrate && python3 manage.py test"
+        run: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py test"
       - name: run server
-        run: bash -c "screen -S ecell-main-server python manage.py runserver 0.0.0.0:3000"
+        run: bash -c "screen -S ecell-main-server python3 manage.py runserver 0.0.0.0:3000"
       
