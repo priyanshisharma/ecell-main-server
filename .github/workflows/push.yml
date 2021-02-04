@@ -15,10 +15,19 @@ jobs:
       AWS_ACCESS_KEY_ID: 'your_aws_access_key_id'
     steps: 
       - uses: actions/checkout@v2
-      - name: Create venv
-        run: bash -c "virtualenv myenv -p python3.6 && source myenv/bin/activate && pip install -r requirements.txt"
-      - name: migrate and test
-        run: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py test"
+      - name: install requirements
+        run: pip install -r requirements.txt
+      - name:  migrating
+        run: 
+          export DJANGO_SETTINGS_MODULE=server.settings
+          export PYTHONPATH=$HOME/builds/priyanshisharma/EcellWeb2k19/
+          export PIP_USE_MIRRORS=true
+
+          python manage.py makemigrations
+          python manage.py migrate
+      - name: test
+        run:
+          python manage.py test
       - name: run server
         run: bash -c "screen -S ecell-main-server python3 manage.py runserver 0.0.0.0:3000"
-      
+    
