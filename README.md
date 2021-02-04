@@ -1,6 +1,6 @@
 # EcellWeb2k20
 
-**(nice EcellWeb2k19 is very cluttered with old builds and huge repo size this repo is created)**
+**(EcellWeb2k19 is very cluttered with old builds and huge repo size this repo is created)**
 API for ECell NIT Raipur android application and website.
 
 ## Setup
