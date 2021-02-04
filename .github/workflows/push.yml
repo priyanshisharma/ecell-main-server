@@ -5,9 +5,7 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    steps: 
-      - name: Give permission
-        run: sudo chown $USER:$USER ./actions-runner 
+    steps:  
       - uses: actions/checkout@v2
       - name: Build the docker-compose stack
         run: docker-compose up -d
