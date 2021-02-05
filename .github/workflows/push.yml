@@ -1,33 +1,15 @@
-name: Deployment Workflow
+name: Docker Compose Actions Workflow
 on: 
   push:
     branches: [ master ]
 jobs:
   build:
     runs-on: self-hosted
-    env:
-      SECRET_KEY: sample_secret_key
-      HOST: "*"
-      DB_TYPE: sqlite3
-      DEBUG: True
-      MOCK_SMS_EMAIL: True
-      AWS_SECRET_ACCESS_KEY: 'your_aws_secret_access_key'
-      AWS_ACCESS_KEY_ID: 'your_aws_access_key_id'
     steps: 
-      - uses: actions/checkout@v2
-      - name: install requirements
-        run: pip install -r requirements.txt
-      - name:  migrating
-        run: 
-          export DJANGO_SETTINGS_MODULE=server.settings
-          export PYTHONPATH=$HOME/builds/priyanshisharma/EcellWeb2k19/
-          export PIP_USE_MIRRORS=true
-
-          python manage.py makemigrations
-          python manage.py migrate
-      - name: test
-        run:
-          python manage.py test
-      - name: run server
-        run: bash -c "screen -S ecell-main-server python3 manage.py runserver 0.0.0.0:3000"
-    
+      - uses: actions/checkout@master
+      - name: Build the docker-compose stack
+        run: docker-compose up -d
+      - name: Check running containers
+        run: docker ps -a
+      - name: Check logs
+        run: docker logs ecell-main-server_web_1
