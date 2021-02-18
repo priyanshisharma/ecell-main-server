@@ -6,7 +6,11 @@ jobs:
   build:
     runs-on: self-hosted
     steps: 
+<<<<<<< HEAD
       - uses: actions/checkout@master
+=======
+      - uses: actions/checkout@v2
+>>>>>>> 582d8a2816d6bf24a1b2a84e36658656c443627f
       - name: Build the docker-compose stack
         run: docker-compose up -d
       - name: Check running containers
